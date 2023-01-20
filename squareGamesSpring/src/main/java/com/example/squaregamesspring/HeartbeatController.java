@@ -23,8 +23,8 @@ public class HeartbeatController {
         return sensor.getString();
     }
 
-    @GetMapping("/games")
-    public Collection<String> getCatalogGames(){
-        return catalog.getGameIdentifiers();
-    }
+//    @GetMapping("/games")
+//    public Collection<String> getCatalogGames(){
+//        return catalog.getGameIdentifiers();
+//    }
 }
