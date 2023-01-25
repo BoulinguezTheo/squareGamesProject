@@ -9,11 +9,12 @@ import com.example.squaregamesspring.service.CreateGameService;
 import com.example.squaregamesspring.service.GameServiceImpl;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
+import jakarta.websocket.server.PathParam;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.UUID;
 
 @RestController
+@RequestMapping("/games")
 public class GameController {
     CreateGameService createGame;
     GameService board;
@@ -23,66 +24,62 @@ public class GameController {
         this.createGame = new CreateGamesImpl();
         this.board = new GameServiceImpl();
     }
-    @PostMapping("/games")
+    @PostMapping("")
     public GameDto createGame(@RequestBody CreateGameDto pParams){
         gameInProgress = createGame.createGame(pParams);
         GameDto gameDto = new GameDto(gameInProgress);
         return gameDto;
     }
 
-    @PutMapping ("/games/{gameId}/movetoken")
+    @PutMapping ("/{gameId}/movetoken")
     public boolean getTokensBoard(@RequestBody MoveTokenDto pParams, @PathVariable("gameId") int gameId) {
         try{
             board.moveToken(pParams, gameId);
-            //TODO : return token with its new position
             return true;
         }catch (InvalidPositionException e){
-            //TODO : return token with its old position
             return false;
         }
     }
 
-    @GetMapping("/games/{gameId}")
+    @GetMapping("/{gameId}")
     public GameDto getGame(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId));
     }
 
-    @GetMapping("/games/{gameId}/remainingtokens")
+    @GetMapping("/{gameId}/remainingtokens")
     public List<TokenDto> getRemainingTokens(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId)).getRemainingTokenList();
     }
 
-    @GetMapping("/games/{gameId}/removedtokens")
+    @GetMapping("/{gameId}/removedtokens")
     public List<TokenDto> getTokensRemoved(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId)).getRemovedTokenList();
     }
 
-    @GetMapping("/games/{gameId}/boardtokens")
+    @GetMapping("/{gameId}/boardtokens")
     public List<TokenDto> getTokensBoard(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId)).getBoardTokenList();
     }
 
-    @GetMapping("/games/{gameId}/status")
-    public GameStatus getStatus(@PathVariable("gameId") int gameId){
-        return new GameDto(storage.getGameById(gameId)).getGameStatus();
+    @GetMapping("/{gameId}/status")
+    public GameStatusDto getStatus(@PathVariable("gameId") int gameId){
+        return new GameStatusDto(storage.getGameById(gameId).getGame().getStatus(), storage.getGameById(gameId).getGame().getCurrentPlayerId());
     }
 
-    @GetMapping("/games/{gameId}/playersids")
+    @GetMapping("/{gameId}/playersids")
     public List<PlayerDto> getPlayerIds(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId)).getPlayerIdsList();
     }
-    @GetMapping("/games/{gameId}/currentplayerid")
+    @GetMapping("/{gameId}/currentplayerid")
     public PlayerDto getCurrentPlayerId(@PathVariable("gameId") int gameId){
         PlayerDto currentPlayer = new PlayerDto();
         currentPlayer.setPlayerId(storage.getGameById(gameId).getGame().getCurrentPlayerId());
         return currentPlayer;
     }
 
-    @GetMapping("/games/{gameId}/refresh")
-    public PlayerDto getRefresh(@PathVariable("gameId") int gameId){
-        PlayerDto currentPlayer = new PlayerDto();
-        currentPlayer.setPlayerId(storage.getGameById(gameId).getGame().getCurrentPlayerId());
-        return currentPlayer;
+    @GetMapping("/{gameId}/refresh")
+    public PlayerDto refresh(@PathVariable("gameId") int gameId){
+        return getCurrentPlayerId(gameId);
     }
 
 }

@@ -23,11 +23,9 @@ public class GameInProgress {
         this.gameId = pGameInProgressId;
         this.tokens = new Tokens(game.getRemainingTokens(), game.getRemovedTokens());
     }
-
     public Game getGame() {
         return game;
     }
-
     public int getGameId() {
         return gameId;
     }
@@ -40,20 +38,3 @@ public class GameInProgress {
         this.board = board;
     }
 }
-
-
-
-//    }
-//        this.tokensPlayerTwo = tokensPlayerTwo;
-//    public void setTokensPlayerTwo(Tokens tokensPlayerTwo) {
-//
-//    }
-//        return tokensPlayerTwo;
-//    public Tokens getTokensPlayerTwo() {
-//
-//    }
-//        this.tokensPlayerOne = tokensPlayerOne;
-//    public void setTokensPlayerOne(Tokens tokensPlayerOne) {
-//    public Tokens getTokensPlayerOne() {
-//        return tokensPlayerOne;
-//    }
