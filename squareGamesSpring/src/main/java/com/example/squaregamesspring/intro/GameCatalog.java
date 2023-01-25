@@ -1,4 +1,4 @@
-package com.example.squaregamesspring;
+package com.example.squaregamesspring.intro;
 
 import java.util.Collection;
 
