@@ -10,18 +10,24 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 @Component
 public class TaquinPlugin implements GamePlugin{
-    @Value("${game.taquin.default-player-count}")
-    private int nbPlayers;
-    @Value("${game.taquin.default-board-size}")
-    private int boardSize;
-    @Override
-    public Game createGame() {
-        GameFactory gameFactory = new TaquinGameFactory();
-        return (gameFactory.createGame(nbPlayers, boardSize));
+    @Value("${taquin.default-player-count")
+    private String nbPlayers;
+    @Value("${taquin.default-board-size}")
+    private String boardSize;
+    @Value("${taquin.default-name}")
+    private String name;
+
+    public TaquinPlugin() {
     }
 
     @Override
-    public String getName(Locale pLanguage) {
-        return null;
+    public Game createGame() {
+        GameFactory gameFactory = new TaquinGameFactory();
+        return (gameFactory.createGame(Integer.parseInt(nbPlayers), Integer.parseInt(boardSize)));
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

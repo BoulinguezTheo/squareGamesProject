@@ -10,19 +10,22 @@ import com.example.squaregamesspring.service.GameServiceImpl;
 import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
 import jakarta.websocket.server.PathParam;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
 @RequestMapping("/games")
 public class GameController {
+    @Autowired
     CreateGameService createGame;
+    @Autowired
     GameService board;
     GameInProgress gameInProgress;
     GamesInProgressStorage.GamesStorage storage;
     public GameController(){
-        this.createGame = new CreateGamesImpl();
-        this.board = new GameServiceImpl();
+//        this.createGame = new CreateGamesImpl();
+//        this.board = new GameServiceImpl();
     }
     @PostMapping("")
     public GameDto createGame(@RequestBody CreateGameDto pParams){

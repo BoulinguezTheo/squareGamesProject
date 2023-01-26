@@ -5,22 +5,25 @@ import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.plugins.*;
 import fr.le_campus_numerique.square_games.engine.Game;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CreateGamesImpl implements CreateGameService {
     GamesInProgressStorage.GamesStorage storage = new GamesInProgressStorage.GamesStorage();
     private static int gameInProgressId = 0;
+    @Autowired
+    private List<GamePlugin> listGames;
 
     @Override
     public GameInProgress createGame(CreateGameDto pParams) {
-        Game game;
-        switch(pParams.getGameName()) {
-            case "tictactoe" -> game = new TicTacToePlugin().createGame();
-            case "taquin" -> game = new TaquinPlugin().createGame();
-            case "connectFour" -> game = new ConnectFourPlugin().createGame();
-            default -> game = null;
-        }
+        Game game = listGames.stream()
+                .filter(g -> g.getName().equals(pParams.getGameName()))
+                .findFirst()
+                .orElse(null)
+                .createGame();
 
         if(game != null){
             gameInProgressId++;
@@ -31,4 +34,6 @@ public class CreateGamesImpl implements CreateGameService {
             return null;
         }
     }
+
+
 }

@@ -10,18 +10,23 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 @Component
 public class ConnectFourPlugin implements GamePlugin{
-    @Value("${game.connectfour.default-player-count}")
-    private int nbPlayers;
-    @Value("${game.connectfour.default-board-size}")
-    private int boardSize;
+    @Value("${connectfour.default-player-count")
+    private String nbPlayers;
+    @Value("${connectfour.default-board-size}")
+    private String boardSize;
+
+    @Value("${connectfour.default-name}")
+    private String name;
+
+    public ConnectFourPlugin() {
+    }
     @Override
     public Game createGame() {
         GameFactory gameFactory = new ConnectFourGameFactory();
-        return (gameFactory.createGame(nbPlayers, boardSize));
+        return (gameFactory.createGame(Integer.parseInt(nbPlayers), Integer.parseInt(boardSize)));
     }
-
     @Override
-    public String getName(Locale pLanguage) {
-        return null;
+    public String getName() {
+        return name;
     }
 }
