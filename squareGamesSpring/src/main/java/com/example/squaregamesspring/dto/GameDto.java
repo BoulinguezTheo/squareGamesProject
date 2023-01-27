@@ -10,16 +10,13 @@ import java.util.*;
 public class GameDto {
     public String gameName;
     public int boardSize;
-
-    public int gameId;
+    public String gameId;
     private GameStatus gameStatus;
-
     private List<TokenDto> remainingTokenList;
     private List<TokenDto> removedTokenList;
     private List<TokenDto> boardTokenList;
     private List<PlayerDto> playerIdsList;
-
-
+    public GameDto(){}
     public GameDto(GameInProgress pGame){
         this.gameName = pGame.getGame().getFactoryId();
         this.gameId = pGame.getGameId();
@@ -63,19 +60,23 @@ public class GameDto {
     public List<TokenDto> getRemovedTokenList() {
         return removedTokenList;
     }
-
     public List<TokenDto> getBoardTokenList() {
         return boardTokenList;
     }
-
-    public int getGameId() {
+    public String getGameId() {
         return gameId;
+    }
+    public void setGameId(String pGameId){ this.gameId = pGameId; }
+    public String getGameName(){ return this.gameName; }
+    public void setGameName(String pGameName){ this.gameName = pGameName; }
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
     }
 
     public GameStatus getGameStatus() {
         return gameStatus;
     }
-
+    public void setGameStatus(GameStatus pStatus){ this.gameStatus = pStatus; }
     public List<PlayerDto> getPlayerIdsList() {
         return playerIdsList;
     }

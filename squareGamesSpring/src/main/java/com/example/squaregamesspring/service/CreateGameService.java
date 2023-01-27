@@ -5,8 +5,10 @@ import com.example.squaregamesspring.dto.GameDto;
 import com.example.squaregamesspring.model.GameInProgress;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLException;
+
 @Service
 public interface CreateGameService {
-    public GameInProgress createGame(CreateGameDto pParams);
+    public GameInProgress createGame(CreateGameDto pParams) throws SQLException;
 
 }

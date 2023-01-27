@@ -1,40 +1,89 @@
 package com.example.squaregamesspring.model;
 
 import fr.le_campus_numerique.square_games.engine.Game;
+import fr.le_campus_numerique.square_games.engine.GameStatus;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
+import java.util.UUID;
 
 public class GameInProgress {
     private Game game;
-    private Board board;
-//    private Player playerOne;
-//    private Player playerTwo;
-//    private Tokens tokensPlayerOne;
-//    private Tokens tokensPlayerTwo;
-    private int gameId;
-    private Tokens tokens;
+    private String gameId;
+    private String gameName;
+    private int boardSize;
+    private int nbPlayer;
+    private List<String> playerIdList;
+    private String currentPlayer;
+    private GameStatus gameStatus;
+    private List<TokenPlayed> tokenPlayedList;
 
-
-    public GameInProgress(Game pGame, int pGameInProgressId){
-//        this.tokensPlayerOne = new Tokens();
-//        this.tokensPlayerTwo = new Tokens();
+    public GameInProgress(){}
+    public GameInProgress(Game pGame, String pGameInProgressId){
         this.game = pGame;
-        this.board = new Board();
         this.gameId = pGameInProgressId;
-        this.tokens = new Tokens(game.getRemainingTokens(), game.getRemovedTokens());
+        this.gameName = pGame.getFactoryId();
+        this.playerIdList = createPlayerIdList(pGame);
+        this.nbPlayer = this.playerIdList.size();
+        this.currentPlayer = pGame.getCurrentPlayerId().toString();
+        this.gameStatus = pGame.getStatus();
+        this.tokenPlayedList = new ArrayList();
+    }
+
+    private List<String> createPlayerIdList(Game pGame){
+        List<String> idList = new ArrayList();
+        for (UUID id : pGame.getPlayerIds()){
+            idList.add(id.toString());
+        }
+        return idList;
     }
     public Game getGame() {
         return game;
     }
-    public int getGameId() {
+    public String getGameId() {
         return gameId;
     }
-
-    public Board getBoard() {
-        return board;
+    public void setGameId(String pId){
+        this.gameId = pId;
     }
-    public Tokens getTokens(){ return tokens; }
-    public void setBoard(Board board) {
-        this.board = board;
+    public List<TokenPlayed> getTokenPlayedList() {
+        return tokenPlayedList;
+    }
+    public String getGameName() {
+        return gameName;
+    }
+    public void setGameName(String pName){ this.gameName = pName;}
+    public int getNbPlayer() {
+        return nbPlayer;
+    }
+    public void setNbPlayer(int pNbPlayers){ this.nbPlayer = pNbPlayers; }
+    public List<String> getPlayerIdList() {
+        return playerIdList;
+    }
+    public String getCurrentPlayer() {
+        return currentPlayer;
+    }
+    public void setCurrentPlayer(String pPlayerId){ this.currentPlayer = pPlayerId; }
+    public GameStatus getGameStatus() {
+        return gameStatus;
+    }
+    public void setGameStatus(String pStatus){
+        gameStatus = setStatus(pStatus);
+    }
+    public void setBoardSize(String pGameName){
+
+    }
+    private GameStatus setStatus(String pStatus){
+        switch(pStatus){
+            case "TERMINATED" :
+                return GameStatus.TERMINATED;
+            case "ONGOING" :
+                return GameStatus.ONGOING;
+            case "SETUP" :
+                return GameStatus.SETUP;
+            default :
+                return null;
+        }
     }
 }

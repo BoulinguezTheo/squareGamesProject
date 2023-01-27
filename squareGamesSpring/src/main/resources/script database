@@ -1,0 +1,35 @@
+DROP DATABASE square_games;
+CREATE DATABASE square_games;
+USE square_games;
+CREATE TABLE games (
+    game_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    game_name VARCHAR(25) NOT NULL,
+    number_of_players INT(2) NOT NULL,
+    current_player_id VARCHAR(50) DEFAULT NULL,
+    game_status VARCHAR(10) NOT NULL,
+    created_at datetime NOT NULL DEFAULT NOW(),
+    updated_at datetime DEFAULT NOW()
+);
+
+CREATE TABLE tokens (
+    game_id VARCHAR(255) NOT NULL PRIMARY KEY,
+    token_name VARCHAR(10) NOT NULL,
+    token_id_player VARCHAR(50) NOT NULL,
+    x_cor INT(2) NOT NULL,
+    y_cor INT(2) NOT NULL,
+    token_type VARCHAR(10),
+    created_at datetime NOT NULL DEFAULT NOW(),
+    updated_at datetime DEFAULT NOW()
+);
+
+CREATE TABLE players (
+    game_id VARCHAR(255) NOT NULL,
+    player_id VARCHAR(50) NOT NULL
+);
+
+ALTER TABLE tokens
+ADD FOREIGN KEY (game_id) REFERENCES games(game_id);
+
+ALTER TABLE players
+ADD FOREIGN KEY (game_id) REFERENCES games(game_id);
+
