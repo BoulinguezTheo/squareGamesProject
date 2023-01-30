@@ -1,22 +1,23 @@
 package com.example.squaregamesspring.dao;
 
+import com.example.squaregamesspring.dto.SaveCreateGameDto;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.singleton.SingletonConnexion;
-import fr.le_campus_numerique.square_games.engine.GameStatus;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
 import static java.lang.String.format;
 
+/*
+ * DAO USELESS AFTER IMPLEMENTING JPA
+ */
 public class GameDaoMySql implements GameDao{
-    int firstPlayer = 0;
-    int secondPlayer = 1;
-    public void saveGame(GameInProgress pGame) throws SQLException {
+
+    public void saveGame(SaveCreateGameDto pGameDto) throws SQLException {
         SingletonConnexion singleton = SingletonConnexion.getInstance();
 //        singleton.getConnection();
-        String req = format("'%s','%s', '%o', '%s', '%s'", pGame.getGameId(), pGame.getGameName(), pGame.getNbPlayer(), pGame.getCurrentPlayer(), pGame.getGameStatus().toString());
+        String req = format("'%s','%s', '%o', '%s', '%s'", pGameDto.getGameId(), pGameDto.getGameName(), pGameDto.getNbPlayers(), pGameDto.getCurrentPlayerId(), pGameDto.getGameStatus().toString());
         String request = "INSERT INTO games (game_id, game_name, number_of_players, current_player_id, game_status) VALUES (" + req + ");";
 
         try{
@@ -31,7 +32,6 @@ public class GameDaoMySql implements GameDao{
         }
     }
 
-    @Override
     public void savePlayers(GameInProgress pGame) throws SQLException {
         SingletonConnexion singleton = SingletonConnexion.getInstance();
         for (String playerId : pGame.getPlayerIdList()){
@@ -75,10 +75,9 @@ public class GameDaoMySql implements GameDao{
         return game;
     }
 
-
-
     @Override
-    public void deleteGame(int pGameId) {
+    public void saveGame(GameInProgress pGame) {
 
     }
 }
+

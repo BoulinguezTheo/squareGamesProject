@@ -12,9 +12,9 @@ public class GameDto {
     public int boardSize;
     public String gameId;
     private GameStatus gameStatus;
+    private List<TokenDto> boardTokenList;
     private List<TokenDto> remainingTokenList;
     private List<TokenDto> removedTokenList;
-    private List<TokenDto> boardTokenList;
     private List<PlayerDto> playerIdsList;
     public GameDto(){}
     public GameDto(GameInProgress pGame){
@@ -22,10 +22,10 @@ public class GameDto {
         this.gameId = pGame.getGameId();
         this.boardSize = pGame.getGame().getBoardSize();
         this.gameStatus = pGame.getGame().getStatus();
-        this.remainingTokenList = convertTokenList(pGame.getGame().getRemainingTokens());
-        this.removedTokenList = convertTokenList(pGame.getGame().getRemovedTokens());
         this.boardTokenList = convertTokenBoard(pGame.getGame().getBoard());
-        this.playerIdsList = convertPlayerIds(pGame.getGame().getPlayerIds());
+//        this.remainingTokenList = convertTokenList(pGame.getGame().getRemainingTokens());
+//        this.removedTokenList = convertTokenList(pGame.getGame().getRemovedTokens());
+//        this.playerIdsList = convertPlayerIds(pGame.getGame().getPlayerIds());
     }
 
     private List<PlayerDto> convertPlayerIds(Set<UUID> pPlayerIdList){

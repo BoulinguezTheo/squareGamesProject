@@ -3,6 +3,7 @@ package com.example.squaregamesspring.service;
 import com.example.squaregamesspring.dao.TokenDao;
 import com.example.squaregamesspring.dao.TokenDaoMySql;
 import com.example.squaregamesspring.dto.MoveTokenDto;
+import com.example.squaregamesspring.dto.SaveTokenDto;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.model.TokenPlayed;
 import fr.le_campus_numerique.square_games.engine.CellPosition;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.sql.SQLException;
 
 @Service
-public class GameServiceImpl implements GameService {
+public class MoveTokenServiceImpl implements MoveTokenService {
     GamesInProgressStorage.GamesStorage storage;
     TokenDao tokenDao = new TokenDaoMySql();
     @Override
@@ -28,11 +29,23 @@ public class GameServiceImpl implements GameService {
         }else{
             token = game.getBoard().get(new CellPosition(pParams.getOldX(), pParams.getOldY()));
         }
+
         if (token != null){
             token.moveTo(new fr.le_campus_numerique.square_games.engine.CellPosition(pParams.getNewX(), pParams.getNewY()));
             TokenPlayed tokenPlayed = new TokenPlayed(gameId, token);
             storage.getGameById(gameId).getTokenPlayedList().add(tokenPlayed);
-            tokenDao.saveToken(tokenPlayed);
+            SaveTokenDto tokenDto = createTokenSaveDto(gameId, tokenPlayed);
+//            tokenDao.saveToken(tokenDto);
         }
+    }
+
+    private SaveTokenDto createTokenSaveDto(String pGameId, TokenPlayed pToken){
+        SaveTokenDto tokenDto = new SaveTokenDto();
+        tokenDto.setGameId(pGameId);
+        tokenDto.setTokenName(pToken.getTokenName());
+        tokenDto.setTokenIdPlayer(pToken.getTokenIdPlayer());
+        tokenDto.setxNewCor(pToken.getxCor());
+        tokenDto.setyNewCor(pToken.getyCor());
+        return tokenDto;
     }
 }

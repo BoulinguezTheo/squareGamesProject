@@ -1,8 +1,8 @@
 package com.example.squaregamesspring.service;
 
-import com.example.squaregamesspring.dao.GameDao;
-import com.example.squaregamesspring.dao.GameDaoMySql;
+import com.example.squaregamesspring.dao.GameRepository;
 import com.example.squaregamesspring.dto.CreateGameDto;
+import com.example.squaregamesspring.dto.SaveCreateGameDto;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.plugins.*;
@@ -20,29 +20,44 @@ public class CreateGamesImpl implements CreateGameService {
     private String gameInProgressId;
     @Autowired
     private List<GamePlugin> listGames;
-    private GameDao dao = new GameDaoMySql();
-
     @Override
-    public GameInProgress createGame(CreateGameDto pParams) throws SQLException {
+    public GameInProgress createGame(CreateGameDto pParams, GameRepository gameRepo) throws SQLException {
         Game game = listGames.stream()
                 .filter(g -> g.getName().equals(pParams.getGameName()))
                 .findFirst()
                 .orElse(null)
                 .createGame();
+        int nbPlayers = listGames.stream()
+                .filter(g -> g.getName().equals(pParams.getGameName()))
+                .findFirst()
+                .orElse(null)
+                .getNbPlayers();
+        int boardSize = listGames.stream()
+                .filter(g -> g.getName().equals(pParams.getGameName()))
+                .findFirst()
+                .orElse(null)
+                .getBoardSize();
 
         if(game != null){
             gameInProgressId =  UUID.randomUUID().toString();
-            GameInProgress newGame = new GameInProgress(game, gameInProgressId);
-            dao.saveGame(newGame);
-            dao.savePlayers(newGame);
-            // oR
+            GameInProgress newGame = new GameInProgress(game, gameInProgressId, nbPlayers, boardSize);
+            SaveCreateGameDto createDto = createSaveDto(newGame);
+            gameRepo.save(createDto);
             storage.addGameInStorage(newGame, gameInProgressId);
             return newGame;
         }else {
             return null;
         }
-
     }
 
+    private SaveCreateGameDto createSaveDto(GameInProgress pGame){
+        SaveCreateGameDto dto = new SaveCreateGameDto();
+        dto.setGameId(pGame.getGameId());
+        dto.setGameName(pGame.getGameName());
+        dto.setNbPlayers(pGame.getNbPlayer());
+        dto.setCurrentPlayerId(pGame.getCurrentPlayer());
+        dto.setGameStatus(pGame.getGameStatus());
+        return dto;
+    }
 
 }

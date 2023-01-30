@@ -5,6 +5,6 @@ import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
 
 import java.sql.SQLException;
 
-public interface GameService {
+public interface MoveTokenService {
     public void moveToken(MoveTokenDto pParams, String gameId) throws InvalidPositionException, SQLException;
 }

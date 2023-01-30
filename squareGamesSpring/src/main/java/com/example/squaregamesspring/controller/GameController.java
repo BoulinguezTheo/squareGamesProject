@@ -1,12 +1,11 @@
 package com.example.squaregamesspring.controller;
 
+import com.example.squaregamesspring.dao.GameRepository;
 import com.example.squaregamesspring.dto.*;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.service.*;
-import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,9 +16,11 @@ import java.util.List;
 @RequestMapping("/games")
 public class GameController {
     @Autowired
+    GameRepository gameRepository;
+    @Autowired
     CreateGameService createGame;
     @Autowired
-    GameService board;
+    MoveTokenService board;
     @Autowired
     ReloadGameService reloading;
     GameInProgress gameInProgress;
@@ -30,8 +31,11 @@ public class GameController {
     }
     @PostMapping("")
     public GameDto createGame(@RequestBody CreateGameDto pParams) throws SQLException {
-        gameInProgress = createGame.createGame(pParams);
-        GameDto gameDto = new GameDto(gameInProgress);
+        gameInProgress = createGame.createGame(pParams, gameRepository);
+        GameDto gameDto = new GameDto();
+        gameDto.setGameId(gameInProgress.getGameId());
+        gameDto.setGameName(gameInProgress.getGameName());
+        gameDto.setBoardSize(gameInProgress.getBoardSize());
         return gameDto;
     }
 
@@ -88,17 +92,17 @@ public class GameController {
         return getCurrentPlayerId(gameId);
     }
 
-    @GetMapping("/{gameId}/reload")
-    public GameDto reloadGame(@PathVariable("gameId") String gameId) throws SQLException {
-        GameInProgress gameReloaded = reloading.reloadGame(gameId);
-        //TODO : reload players
-        //TODO : reload tokens
-        GameDto game = new GameDto();
-        game.setGameId(gameReloaded.getGameId());
-        game.setGameName(gameReloaded.getGameName());
-        game.setGameStatus(gameReloaded.getGameStatus());
-        game.setBoardSize(gameReloaded.getGame().getBoardSize());
-        return game;
-    }
+//    @GetMapping("/{gameId}/reload")
+//    public GameDto reloadGame(@PathVariable("gameId") String gameId) throws SQLException {
+//        GameInProgress gameReloaded = reloading.reloadGame(gameId);
+//        //TODO : reload players
+//        //TODO : reload tokens
+//        GameDto game = new GameDto();
+//        game.setGameId(gameReloaded.getGameId());
+//        game.setGameName(gameReloaded.getGameName());
+//        game.setGameStatus(gameReloaded.getGameStatus());
+//        game.setBoardSize(gameReloaded.getGame().getBoardSize());
+//        return game;
+//    }
 
 }

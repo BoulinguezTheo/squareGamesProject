@@ -29,4 +29,8 @@ public class TicTacToePlugin implements GamePlugin{
     public String getName() {
         return name;
     }
+    @Override
+    public int getBoardSize(){ return Integer.parseInt(boardSize); }
+    @Override
+    public int getNbPlayers(){ return Integer.parseInt(nbPlayers); }
 }

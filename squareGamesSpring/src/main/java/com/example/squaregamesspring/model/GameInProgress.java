@@ -20,7 +20,7 @@ public class GameInProgress {
     private List<TokenPlayed> tokenPlayedList;
 
     public GameInProgress(){}
-    public GameInProgress(Game pGame, String pGameInProgressId){
+    public GameInProgress(Game pGame, String pGameInProgressId, int pNbPlayers, int pBoardSize){
         this.game = pGame;
         this.gameId = pGameInProgressId;
         this.gameName = pGame.getFactoryId();
@@ -29,6 +29,8 @@ public class GameInProgress {
         this.currentPlayer = pGame.getCurrentPlayerId().toString();
         this.gameStatus = pGame.getStatus();
         this.tokenPlayedList = new ArrayList();
+        this.nbPlayer = pNbPlayers;
+        this.boardSize = pBoardSize;
     }
 
     private List<String> createPlayerIdList(Game pGame){
@@ -70,6 +72,10 @@ public class GameInProgress {
     }
     public void setGameStatus(String pStatus){
         gameStatus = setStatus(pStatus);
+    }
+
+    public int getBoardSize() {
+        return boardSize;
     }
     public void setBoardSize(String pGameName){
 

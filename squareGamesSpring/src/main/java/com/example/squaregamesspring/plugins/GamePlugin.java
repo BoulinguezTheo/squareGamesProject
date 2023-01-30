@@ -7,4 +7,6 @@ import java.util.Locale;
 public interface GamePlugin {
     public Game createGame();
     public String getName();
+    public int getBoardSize();
+    public int getNbPlayers();
 }
