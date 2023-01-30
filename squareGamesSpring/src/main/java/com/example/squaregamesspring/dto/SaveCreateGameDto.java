@@ -15,7 +15,7 @@ public class SaveCreateGameDto {
     private String currentPlayerId;
     private String gameStatus;
 
-
+//CONSTRUCTORS
     public SaveCreateGameDto() {
     }
     public SaveCreateGameDto(String gameId, String gameName, int nbPlayers, String currentPlayerId, GameStatus gameStatus) {
@@ -26,7 +26,7 @@ public class SaveCreateGameDto {
         this.gameStatus = gameStatus.toString();
     }
 
-
+//GETTERS AND SETTERS
     public String getGameId() {
         return gameId;
     }

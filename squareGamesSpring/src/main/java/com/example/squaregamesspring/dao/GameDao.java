@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public interface GameDao {
+    public void saveGame(GameInProgress pGame);
 
 //    public void saveGame(SaveCreateGameDto pGameDto) throws SQLException;
 //    public void savePlayers(GameInProgress pGame) throws SQLException;

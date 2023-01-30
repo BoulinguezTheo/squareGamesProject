@@ -15,8 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/games")
 public class GameController {
-    @Autowired
-    GameRepository gameRepository;
+
     @Autowired
     CreateGameService createGame;
     @Autowired
@@ -31,7 +30,7 @@ public class GameController {
     }
     @PostMapping("")
     public GameDto createGame(@RequestBody CreateGameDto pParams) throws SQLException {
-        gameInProgress = createGame.createGame(pParams, gameRepository);
+        gameInProgress = createGame.createGame(pParams);
         GameDto gameDto = new GameDto();
         gameDto.setGameId(gameInProgress.getGameId());
         gameDto.setGameName(gameInProgress.getGameName());

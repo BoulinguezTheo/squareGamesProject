@@ -1,5 +1,6 @@
-package com.example.squaregamesspring.dao;
+package com.example.squaregamesspring.dao.MySql;
 
+import com.example.squaregamesspring.dao.TokenDao;
 import com.example.squaregamesspring.dto.SaveTokenDto;
 import com.example.squaregamesspring.model.TokenPlayed;
 import com.example.squaregamesspring.singleton.SingletonConnexion;
@@ -8,7 +9,7 @@ import java.sql.Statement;
 
 import static java.lang.String.format;
 
-public class TokenDaoMySql implements TokenDao{
+public class TokenDaoMySql implements TokenDao {
 
     @Override
     public void saveToken(SaveTokenDto pToken) throws SQLException {

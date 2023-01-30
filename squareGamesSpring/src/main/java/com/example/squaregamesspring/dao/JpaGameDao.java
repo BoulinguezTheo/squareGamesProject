@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JpaSaveGame implements GameDao{
+public class JpaGameDao implements GameDao{
     @Autowired
     GameRepository gameRepo;
+    @Override
     public void saveGame(GameInProgress pGame){
         SaveCreateGameDto saveGameDto = createSaveDto(pGame);
         gameRepo.save(saveGameDto);

@@ -1,8 +1,8 @@
 package com.example.squaregamesspring.service;
 
-import com.example.squaregamesspring.dao.GameRepository;
+
+import com.example.squaregamesspring.dao.JpaGameDao;
 import com.example.squaregamesspring.dto.CreateGameDto;
-import com.example.squaregamesspring.dto.SaveCreateGameDto;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.plugins.*;
@@ -21,7 +21,7 @@ public class CreateGamesImpl implements CreateGameService {
     @Autowired
     private List<GamePlugin> listGames;
     @Override
-    public GameInProgress createGame(CreateGameDto pParams, GameRepository gameRepo) throws SQLException {
+    public GameInProgress createGame(CreateGameDto pParams) throws SQLException {
         Game game = listGames.stream()
                 .filter(g -> g.getName().equals(pParams.getGameName()))
                 .findFirst()
@@ -41,8 +41,9 @@ public class CreateGamesImpl implements CreateGameService {
         if(game != null){
             gameInProgressId =  UUID.randomUUID().toString();
             GameInProgress newGame = new GameInProgress(game, gameInProgressId, nbPlayers, boardSize);
-            SaveCreateGameDto createDto = createSaveDto(newGame);
-            gameRepo.save(createDto);
+
+            JpaGameDao saveJpa = new JpaGameDao();
+            saveJpa.saveGame(newGame);
             storage.addGameInStorage(newGame, gameInProgressId);
             return newGame;
         }else {
@@ -50,14 +51,6 @@ public class CreateGamesImpl implements CreateGameService {
         }
     }
 
-    private SaveCreateGameDto createSaveDto(GameInProgress pGame){
-        SaveCreateGameDto dto = new SaveCreateGameDto();
-        dto.setGameId(pGame.getGameId());
-        dto.setGameName(pGame.getGameName());
-        dto.setNbPlayers(pGame.getNbPlayer());
-        dto.setCurrentPlayerId(pGame.getCurrentPlayer());
-        dto.setGameStatus(pGame.getGameStatus());
-        return dto;
-    }
+
 
 }

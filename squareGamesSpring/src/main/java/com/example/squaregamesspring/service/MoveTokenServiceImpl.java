@@ -1,7 +1,7 @@
 package com.example.squaregamesspring.service;
 
 import com.example.squaregamesspring.dao.TokenDao;
-import com.example.squaregamesspring.dao.TokenDaoMySql;
+import com.example.squaregamesspring.dao.MySql.TokenDaoMySql;
 import com.example.squaregamesspring.dto.MoveTokenDto;
 import com.example.squaregamesspring.dto.SaveTokenDto;
 import com.example.squaregamesspring.model.GamesInProgressStorage;

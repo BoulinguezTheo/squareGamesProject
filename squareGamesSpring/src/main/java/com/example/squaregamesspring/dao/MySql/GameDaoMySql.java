@@ -1,5 +1,6 @@
-package com.example.squaregamesspring.dao;
+package com.example.squaregamesspring.dao.MySql;
 
+import com.example.squaregamesspring.dao.GameDao;
 import com.example.squaregamesspring.dto.SaveCreateGameDto;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.singleton.SingletonConnexion;
@@ -12,7 +13,7 @@ import static java.lang.String.format;
 /*
  * DAO USELESS AFTER IMPLEMENTING JPA
  */
-public class GameDaoMySql implements GameDao{
+public class GameDaoMySql implements GameDao {
 
     public void saveGame(SaveCreateGameDto pGameDto) throws SQLException {
         SingletonConnexion singleton = SingletonConnexion.getInstance();
