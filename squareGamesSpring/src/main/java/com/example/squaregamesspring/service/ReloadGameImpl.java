@@ -23,7 +23,7 @@ public class ReloadGameImpl implements ReloadGameService {
     public GameInProgress reloadGame(String pGameID) throws InconsistentGameDefinitionException {
         GameEntity reloaded = reloadDao.reloadGame(pGameID);
         List<SaveTokenEntity> tokensList = reloaded.getTokenList();
-        Collection<TokenPosition> managedTokens= manageTokens(tokensList);
+        Collection<TokenPosition<String>> managedTokens= manageTokens(tokensList);
 
         GameFactory factory = new TicTacToeGameFactory();
         Game game = factory.createGame(reloaded.getBoardSize(), reloaded.getPlayersIdList().stream().toList(), managedTokens ,null);
@@ -31,9 +31,9 @@ public class ReloadGameImpl implements ReloadGameService {
         return null;
     }
 
-    private Collection<TokenPosition> manageTokens(List<SaveTokenEntity> pList){
-        Collection<TokenPosition> returnList = new ArrayList();
-        pList.stream().forEach(e -> returnList.add(new TokenPosition(e.getTokenIdPlayer(), e.getTokenName(), e.getxNewCor(), e.getyNewCor())));
+    private Collection<TokenPosition<String>> manageTokens(List<SaveTokenEntity> pList){
+        Collection<TokenPosition<String>> returnList = new ArrayList();
+        pList.stream().forEach(e -> returnList.add(new TokenPosition<>(e.getTokenIdPlayer(), e.getTokenName(), e.getxNewCor(), e.getyNewCor())));
         return returnList;
     }
 }
