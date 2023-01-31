@@ -1,24 +1,38 @@
 package com.example.squaregamesspring.dto;
 
 import fr.le_campus_numerique.square_games.engine.GameStatus;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name="games")
-public class SaveCreateGameDto {
+public class GameEntity {
+
     @Id
+    @Column(name="game_id")
     private String gameId;
+    @Column(name="game_name", nullable = false)
     private String gameName;
+    @Column(name="boards_size", nullable = false)
+    private int boardSize;
+    @Column(name="number_of_players", nullable = false)
     private int nbPlayers;
+    @Column(name="current_id_player")
     private String currentPlayerId;
+    @Column(name="game_status", nullable = false)
     private String gameStatus;
+    @ElementCollection
+    @CollectionTable(name="players_ids")
+    private List<String> playerIdsList;
+    @OneToMany
+    List<SaveTokenEntity> tokenList;
 
 //CONSTRUCTORS
-    public SaveCreateGameDto() {
+    public GameEntity() {
     }
-    public SaveCreateGameDto(String gameId, String gameName, int nbPlayers, String currentPlayerId, GameStatus gameStatus) {
+    public GameEntity(String gameId, String gameName, int nbPlayers, String currentPlayerId, GameStatus gameStatus) {
         this.gameId = gameId;
         this.gameName = gameName;
         this.nbPlayers = nbPlayers;
@@ -45,6 +59,8 @@ public class SaveCreateGameDto {
     public void setNbPlayers(int nbPlayers) {
         this.nbPlayers = nbPlayers;
     }
+    public void setBoardSize(int boardSize){ this.boardSize = boardSize; }
+    public int getBoardSize(){ return this.boardSize; }
     public String getCurrentPlayerId() {
         return currentPlayerId;
     }
@@ -56,5 +72,17 @@ public class SaveCreateGameDto {
     }
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus.toString();
+    }
+    public void setPlayersIdList(List<String> pListId){
+        this.playerIdsList = pListId;
+    }
+    public Collection<String> getPlayersIdList(){ return this.playerIdsList; }
+
+    public List<SaveTokenEntity> getTokenList() {
+        return tokenList;
+    }
+
+    public void setTokenList(List<SaveTokenEntity> tokenList) {
+        this.tokenList = tokenList;
     }
 }

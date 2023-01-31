@@ -23,7 +23,7 @@ public class GameDto {
         this.boardSize = pGame.getGame().getBoardSize();
         this.gameStatus = pGame.getGame().getStatus();
         this.boardTokenList = convertTokenBoard(pGame.getGame().getBoard());
-//        this.remainingTokenList = convertTokenList(pGame.getGame().getRemainingTokens());
+        this.remainingTokenList = convertTokenList(pGame.getGame().getRemainingTokens());
 //        this.removedTokenList = convertTokenList(pGame.getGame().getRemovedTokens());
 //        this.playerIdsList = convertPlayerIds(pGame.getGame().getPlayerIds());
     }
@@ -57,11 +57,17 @@ public class GameDto {
     public List<TokenDto> getRemainingTokenList() {
         return remainingTokenList;
     }
+    public void setRemainingTokenList(GameInProgress pGame){
+        this.remainingTokenList = convertTokenList(pGame.getGame().getRemainingTokens());
+    }
     public List<TokenDto> getRemovedTokenList() {
         return removedTokenList;
     }
     public List<TokenDto> getBoardTokenList() {
         return boardTokenList;
+    }
+    public void setBoardTokenList(GameInProgress pGame){
+        this.boardTokenList = convertTokenBoard(pGame.getGame().getBoard());
     }
     public String getGameId() {
         return gameId;
@@ -72,7 +78,6 @@ public class GameDto {
     public void setBoardSize(int boardSize) {
         this.boardSize = boardSize;
     }
-
     public GameStatus getGameStatus() {
         return gameStatus;
     }

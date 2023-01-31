@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 @Component
 public class ConnectFourPlugin implements GamePlugin{
-    @Value("${connectfour.default-player-count")
+    @Value("${connectfour.default-player-count}")
     private String nbPlayers;
     @Value("${connectfour.default-board-size}")
     private String boardSize;

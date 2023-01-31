@@ -1,4 +1,6 @@
 package com.example.squaregamesspring.model;
+import com.example.squaregamesspring.dto.MoveTokenDto;
+import com.example.squaregamesspring.dto.TokenDto;
 import fr.le_campus_numerique.square_games.engine.Token;
 
 public class TokenPlayed {
@@ -7,14 +9,19 @@ public class TokenPlayed {
     private String tokenName;
     private int xCor;
     private int yCor;
+    private Integer yOldCor = null;
+    private Integer xOldCor = null;
 
-    public TokenPlayed(String pGameId, Token token){
+    public TokenPlayed(String pGameId, Token token, MoveTokenDto pTokenDto){
         this.gameId = pGameId;
         this.tokenIdPlayer = token.getOwnerId().toString();
         this.tokenName = token.getName();
         this.xCor = token.getPosition().x();
         this.yCor = token.getPosition().y();
+        setxOldCor(pTokenDto.getOldX());
+        setyOldCor(pTokenDto.getOldX());
     }
+
 
     public String getGameId() {
         return gameId;
@@ -54,5 +61,25 @@ public class TokenPlayed {
 
     public void setyCor(int yCor) {
         this.yCor = yCor;
+    }
+
+    public Integer getyOldCor() {
+        return yOldCor;
+    }
+
+    public void setyOldCor(Integer pyCor) {
+        if(pyCor != null) {
+            this.yOldCor = pyCor;
+        }
+    }
+
+    public Integer getxOldCor() {
+        return xOldCor;
+    }
+
+    public void setxOldCor(Integer pxCor) {
+        if(pxCor != null) {
+            this.xOldCor = yCor;
+        }
     }
 }

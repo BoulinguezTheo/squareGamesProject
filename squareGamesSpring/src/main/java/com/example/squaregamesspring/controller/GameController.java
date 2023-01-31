@@ -1,6 +1,5 @@
 package com.example.squaregamesspring.controller;
 
-import com.example.squaregamesspring.dao.GameRepository;
 import com.example.squaregamesspring.dto.*;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
@@ -35,19 +34,24 @@ public class GameController {
         gameDto.setGameId(gameInProgress.getGameId());
         gameDto.setGameName(gameInProgress.getGameName());
         gameDto.setBoardSize(gameInProgress.getBoardSize());
+        gameDto.setGameStatus(gameInProgress.getGameStatus());
+        gameDto.setBoardTokenList(gameInProgress);
+        gameDto.setRemainingTokenList(gameInProgress);
         return gameDto;
     }
 
     @PutMapping ("/{gameId}/movetoken")
-    public boolean getTokensBoard(@RequestBody MoveTokenDto pParams, @PathVariable("gameId") String gameId) {
-        try{
-            board.moveToken(pParams, gameId);
-            return true;
-        }catch (InvalidPositionException e){
-            return false;
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public boolean getTokensBoard(@RequestBody MoveTokenDto pParams, @PathVariable("gameId") String gameId) throws SQLException{
+            try{
+                board.moveToken(pParams, gameId);
+                return true;
+            } catch(InvalidPositionException i){
+                System.out.println(i);
+                return false;
+            }catch(NullPointerException n){
+                System.out.println(n);
+                return false;
+            }
     }
 
     @GetMapping("/{gameId}")
@@ -89,6 +93,12 @@ public class GameController {
     @GetMapping("/{gameId}/refresh")
     public PlayerDto refresh(@PathVariable("gameId") String gameId){
         return getCurrentPlayerId(gameId);
+    }
+
+    @GetMapping("/{gameId}/reload")
+    public GameDto reload(@PathVariable("gameId") String gameId){
+
+        return null;
     }
 
 //    @GetMapping("/{gameId}/reload")

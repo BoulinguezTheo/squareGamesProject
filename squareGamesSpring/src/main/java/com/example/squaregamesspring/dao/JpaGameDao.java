@@ -1,6 +1,6 @@
 package com.example.squaregamesspring.dao;
 
-import com.example.squaregamesspring.dto.SaveCreateGameDto;
+import com.example.squaregamesspring.dto.GameEntity;
 import com.example.squaregamesspring.model.GameInProgress;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -11,17 +11,24 @@ public class JpaGameDao implements GameDao{
     GameRepository gameRepo;
     @Override
     public void saveGame(GameInProgress pGame){
-        SaveCreateGameDto saveGameDto = createSaveDto(pGame);
-        gameRepo.save(saveGameDto);
+        GameEntity saveGameEntity = createSaveEntity(pGame);
+        gameRepo.save(saveGameEntity);
+    }
+    @Override
+    public GameEntity reloadGame(String pId){
+        return gameRepo.findById(pId).get();
+
     }
 
-    private SaveCreateGameDto createSaveDto(GameInProgress pGame){
-        SaveCreateGameDto dto = new SaveCreateGameDto();
+    private GameEntity createSaveEntity(GameInProgress pGame){
+        GameEntity dto = new GameEntity();
         dto.setGameId(pGame.getGameId());
         dto.setGameName(pGame.getGameName());
+        dto.setBoardSize(pGame.getBoardSize());
         dto.setNbPlayers(pGame.getNbPlayer());
         dto.setCurrentPlayerId(pGame.getCurrentPlayer());
         dto.setGameStatus(pGame.getGameStatus());
+        dto.setPlayersIdList(pGame.getPlayerIdList());
         return dto;
     }
 }

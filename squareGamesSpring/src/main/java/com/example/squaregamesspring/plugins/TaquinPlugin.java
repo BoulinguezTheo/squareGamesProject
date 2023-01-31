@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import java.util.Locale;
 @Component
 public class TaquinPlugin implements GamePlugin{
-    @Value("${taquin.default-player-count")
+    @Value("${taquin.default-player-count}")
     private String nbPlayers;
     @Value("${taquin.default-board-size}")
     private String boardSize;

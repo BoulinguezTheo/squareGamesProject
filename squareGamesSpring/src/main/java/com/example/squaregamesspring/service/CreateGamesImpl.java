@@ -19,9 +19,11 @@ public class CreateGamesImpl implements CreateGameService {
     GamesInProgressStorage.GamesStorage storage = new GamesInProgressStorage.GamesStorage();
     private String gameInProgressId;
     @Autowired
+    JpaGameDao saveJpa;
+    @Autowired
     private List<GamePlugin> listGames;
     @Override
-    public GameInProgress createGame(CreateGameDto pParams) throws SQLException {
+    public GameInProgress createGame(CreateGameDto pParams){
         Game game = listGames.stream()
                 .filter(g -> g.getName().equals(pParams.getGameName()))
                 .findFirst()
@@ -42,7 +44,6 @@ public class CreateGamesImpl implements CreateGameService {
             gameInProgressId =  UUID.randomUUID().toString();
             GameInProgress newGame = new GameInProgress(game, gameInProgressId, nbPlayers, boardSize);
 
-            JpaGameDao saveJpa = new JpaGameDao();
             saveJpa.saveGame(newGame);
             storage.addGameInStorage(newGame, gameInProgressId);
             return newGame;
