@@ -10,10 +10,10 @@ public class GamesInProgressStorage {
     public static class GamesStorage{
         static Map<String, GameInProgress> storage = new HashMap();
 
-        public void addGameInStorage(GameInProgress pGame, String pId){
+        public static void addGameInStorage(GameInProgress pGame, String pId){
             storage.put(pId, pGame);
         }
-        public Map getStorage(){
+        public static Map getStorage(){
             return storage;
         }
 

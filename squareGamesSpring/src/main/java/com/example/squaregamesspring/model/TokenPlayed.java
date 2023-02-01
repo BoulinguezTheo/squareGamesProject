@@ -14,7 +14,7 @@ public class TokenPlayed {
 
     public TokenPlayed(String pGameId, Token token, MoveTokenDto pTokenDto){
         this.gameId = pGameId;
-        this.tokenIdPlayer = token.getOwnerId().toString();
+        this.tokenIdPlayer = token.getOwnerId().get().toString();
         this.tokenName = token.getName();
         this.xCor = token.getPosition().x();
         this.yCor = token.getPosition().y();

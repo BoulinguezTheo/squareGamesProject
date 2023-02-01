@@ -4,6 +4,7 @@ import com.example.squaregamesspring.dto.*;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.service.*;
+import fr.le_campus_numerique.square_games.engine.InconsistentGameDefinitionException;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -96,9 +97,17 @@ public class GameController {
     }
 
     @GetMapping("/{gameId}/reload")
-    public GameDto reload(@PathVariable("gameId") String gameId){
+    public GameDto reload(@PathVariable("gameId") String gameId) throws SQLException, InconsistentGameDefinitionException {
+        reloading.reloadGame(gameId);
+        GameDto reloadDto = new GameDto();
+        reloadDto.setGameId(storage.getGameById(gameId).getGameId());
+        reloadDto.setGameName(storage.getGameById(gameId).getGameName());
+        reloadDto.setBoardSize(storage.getGameById(gameId).getBoardSize());
+        reloadDto.setGameStatus(storage.getGameById(gameId).getGameStatus());
+        reloadDto.setBoardTokenList(storage.getGameById(gameId));
+        reloadDto.setRemainingTokenList(storage.getGameById(gameId));
 
-        return null;
+        return reloadDto;
     }
 
 //    @GetMapping("/{gameId}/reload")

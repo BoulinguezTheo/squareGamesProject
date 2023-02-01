@@ -26,7 +26,7 @@ public class GameEntity {
     @ElementCollection
     @CollectionTable(name="players_ids")
     private List<String> playerIdsList;
-    @OneToMany
+    @OneToMany(mappedBy = "gameId")
     List<SaveTokenEntity> tokenList;
 
 //CONSTRUCTORS
@@ -81,7 +81,6 @@ public class GameEntity {
     public List<SaveTokenEntity> getTokenList() {
         return tokenList;
     }
-
     public void setTokenList(List<SaveTokenEntity> tokenList) {
         this.tokenList = tokenList;
     }

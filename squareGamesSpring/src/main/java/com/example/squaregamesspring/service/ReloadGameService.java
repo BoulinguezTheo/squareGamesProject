@@ -6,5 +6,5 @@ import fr.le_campus_numerique.square_games.engine.InconsistentGameDefinitionExce
 import java.sql.SQLException;
 
 public interface ReloadGameService {
-    public GameInProgress reloadGame(String pGameID) throws SQLException, InconsistentGameDefinitionException;
+    public void reloadGame(String pGameID) throws SQLException, InconsistentGameDefinitionException;
 }
