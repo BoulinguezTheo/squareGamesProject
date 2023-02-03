@@ -1,4 +1,4 @@
-package com.example.squaregamesspring.dao.MySql;
+package com.example.squaregamesspring.dao.mysql;
 
 import com.example.squaregamesspring.dto.SaveTokenEntity;
 import com.example.squaregamesspring.singleton.SingletonConnexion;

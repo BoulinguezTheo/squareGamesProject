@@ -1,5 +1,6 @@
 package com.example.squaregamesspring.dao;
 
+import com.example.squaregamesspring.dao.repository.TokenRepository;
 import com.example.squaregamesspring.dto.SaveTokenEntity;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.TokenPlayed;

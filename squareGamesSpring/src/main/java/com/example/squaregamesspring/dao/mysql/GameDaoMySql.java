@@ -1,12 +1,4 @@
-package com.example.squaregamesspring.dao.MySql;
-
-import com.example.squaregamesspring.dao.GameDao;
-import com.example.squaregamesspring.dto.GameEntity;
-import com.example.squaregamesspring.model.GameInProgress;
-import com.example.squaregamesspring.singleton.SingletonConnexion;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+package com.example.squaregamesspring.dao.mysql;
 
 import static java.lang.String.format;
 

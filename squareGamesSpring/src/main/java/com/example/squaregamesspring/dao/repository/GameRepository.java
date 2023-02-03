@@ -1,4 +1,4 @@
-package com.example.squaregamesspring.dao;
+package com.example.squaregamesspring.dao.repository;
 
 import com.example.squaregamesspring.dto.GameEntity;
 import org.springframework.data.repository.CrudRepository;

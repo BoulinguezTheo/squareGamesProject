@@ -1,0 +1,31 @@
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger{36}.%M - %msg%n
+            </pattern>
+        </encoder>
+    </appender>
+
+<!--    <root level="info">-->
+<!--        <appender-ref ref="STDOUT"/>-->
+<!--    </root>-->
+    <property name="LOG_PATH" value = "src/main/resources/logs"/>
+    // Pattern de présentation du log
+    <appender name="FILE_LOG" class="ch.qos.logback.core.FileAppender">
+        <file>${LOG_PATH}/app.log</file>
+        <encoder >
+            <Pattern class="ch.qos.logback.classic.PatternLayout">
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%M - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+    <logger name="com.example.squaregamesspring" level="info" additivity="true">
+    </logger>
+    <logger name="com.example.squaregamesspring.service" level="debug" additivity="true">
+    </logger>
+    <root level="error"> // Niveau de journalisation par défaut
+        <appender-ref ref="FILE_LOG"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

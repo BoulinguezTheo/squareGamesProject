@@ -1,10 +1,7 @@
 package com.example.squaregamesspring.service;
 
 import com.example.squaregamesspring.dao.JpaTokenDao;
-import com.example.squaregamesspring.dao.TokenDao;
-import com.example.squaregamesspring.dao.MySql.TokenDaoMySql;
 import com.example.squaregamesspring.dto.MoveTokenDto;
-import com.example.squaregamesspring.dto.SaveTokenEntity;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.model.TokenPlayed;
 import fr.le_campus_numerique.square_games.engine.CellPosition;

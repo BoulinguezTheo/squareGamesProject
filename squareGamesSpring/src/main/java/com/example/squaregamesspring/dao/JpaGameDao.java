@@ -1,5 +1,6 @@
 package com.example.squaregamesspring.dao;
 
+import com.example.squaregamesspring.dao.repository.GameRepository;
 import com.example.squaregamesspring.dto.GameEntity;
 import com.example.squaregamesspring.model.GameInProgress;
 import org.springframework.beans.factory.annotation.Autowired;
