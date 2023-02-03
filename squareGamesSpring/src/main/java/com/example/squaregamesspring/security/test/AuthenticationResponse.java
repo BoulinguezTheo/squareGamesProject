@@ -1,4 +1,4 @@
-package com.example.squaregamesspring.security;
+package com.example.squaregamesspring.security.test;
 
 public class AuthenticationResponse {
     private final String jwt;

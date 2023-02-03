@@ -1,4 +1,4 @@
-package com.example.squaregamesspring.security;
+package com.example.squaregamesspring.security.test;
 
 public class AuthenticationRequest {
     private String username;

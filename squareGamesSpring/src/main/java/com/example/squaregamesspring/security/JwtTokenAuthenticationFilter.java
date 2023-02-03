@@ -15,8 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
-
-import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
@@ -31,7 +29,6 @@ public class JwtTokenAuthenticationFilter extends OncePerRequestFilter {
         final String SIGNINGKEY = "e9sng4q";
         if (header != null) {
             if(header.startsWith("Bearer")) {
-                //TODO : what do do ?
                 final String token = header.split(" ")[1].trim();
 
                 // On “parse” le token en utilisant la même clé de signature qui sera utilisée pour générer le token à l’authentification (“secret”)

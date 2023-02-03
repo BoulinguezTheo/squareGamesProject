@@ -1,4 +1,4 @@
-package com.example.squaregamesspring.security;
+package com.example.squaregamesspring.security.test;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
