@@ -20,7 +20,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true, securedEnabled = true)
 @EnableWebSecurity
-public class SecurityConfig extends WebSecurityConfiguration {
+public class MySecurityConfig extends WebSecurityConfiguration {
     @Autowired
     private final MyUserDetailsService userDetailsService;
     @Autowired
@@ -30,7 +30,7 @@ public class SecurityConfig extends WebSecurityConfiguration {
     @Autowired
     private AuthenticationConfiguration authenticationManager;
 //
-    public SecurityConfig(final MyUserDetailsService userDetailsService) {
+    public MySecurityConfig(final MyUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
     @Bean

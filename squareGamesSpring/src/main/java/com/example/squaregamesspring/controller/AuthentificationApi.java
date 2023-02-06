@@ -3,9 +3,9 @@ package com.example.squaregamesspring.controller;
 import com.example.squaregamesspring.dao.repository.UserRepository;
 import com.example.squaregamesspring.dto.UserDto;
 import com.example.squaregamesspring.dto.UserEntity;
-import com.example.squaregamesspring.security.*;
+import com.example.squaregamesspring.security.MyUserDetailsService;
+import com.example.squaregamesspring.security.MySecurityConfig;
 import com.example.squaregamesspring.security.test.AuthenticationRequest;
-import org.springframework.security.authentication.AuthenticationManager;
 import com.example.squaregamesspring.security.test.JwtTokenUtil;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,19 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.Valid;
 import java.util.Date;
 import java.util.stream.Collectors;
 
 @RestController
 //@RequestMapping(path="api/public")
 public class AuthentificationApi {
+    private final MySecurityConfig mySecurityConfig;
     @Autowired
     private MyUserDetailsService userDetailsService;
     @Autowired
@@ -34,12 +38,12 @@ public class AuthentificationApi {
     UserRepository userRepo;
     private final long TOKEN_DURATION = 3600 * 1000L;
     private final String KEY = "e9sng4q";
-    @Autowired
+
     private final AuthenticationManager authenticationManager;
 
-    public AuthentificationApi(AuthenticationManager authenticationManager, SecurityConfig securityConfig) {
+    public AuthentificationApi(AuthenticationManager authenticationManager, MySecurityConfig mySecurityConfig) {
         this.authenticationManager = authenticationManager;
-        this.securityConfig = securityConfig;
+        this.mySecurityConfig = mySecurityConfig;
     }
 
 
@@ -79,7 +83,7 @@ public class AuthentificationApi {
     public void newUser(@RequestBody @Valid UserDto userDto){
         String name = userDto.getUsername();
         String password = userDto.getPassword();
-        String encryptedPassword = SecurityConfig.passwordEncoder().encode(password);
+        String encryptedPassword = MySecurityConfig.passwordEncoder().encode(password);
 
         UserEntity userEntity = new UserEntity();
        userEntity.setUsername(name);

@@ -1,13 +1,13 @@
 <component name="libraryTable">
   <library name="Maven: fr.le_campus_numerique.square_games:engine:1.0-SNAPSHOT">
     <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-20230201.142820-7.jar!/" />
     </CLASSES>
     <JAVADOC>
-      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-SNAPSHOT-javadoc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-20230201.142820-7-javadoc.jar!/" />
     </JAVADOC>
     <SOURCES>
-      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-SNAPSHOT-sources.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/fr/le_campus_numerique/square_games/engine/1.0-SNAPSHOT/engine-1.0-20230201.142820-7-sources.jar!/" />
     </SOURCES>
   </library>
 </component>

@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/squareGamesProject.iml" filepath="$PROJECT_DIR$/.idea/squareGamesProject.iml" />
       <module fileurl="file://$PROJECT_DIR$/squareGamesSpring/squareGamesSpring.iml" filepath="$PROJECT_DIR$/squareGamesSpring/squareGamesSpring.iml" />
     </modules>
   </component>
