@@ -3,7 +3,7 @@ package com.example.squaregamesspring.dto;
 import java.util.UUID;
 
 public class PlayerDto {
-    UUID playerId;
+    private UUID playerId;
 
     public UUID getPlayerId() {
         return playerId;
