@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public class GameStatusDto {
     private GameStatus gameStatus;
-    UUID playerId;
+    private UUID playerId;
     public GameStatusDto(){
 
     }

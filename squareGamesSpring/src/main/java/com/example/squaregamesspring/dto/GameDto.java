@@ -8,10 +8,10 @@ import fr.le_campus_numerique.square_games.engine.Token;
 import java.util.*;
 
 public class GameDto {
-    public String gameName;
-    public int boardSize;
+    private String gameName;
+    private int boardSize;
 
-    public int gameId;
+    private int gameId;
     private GameStatus gameStatus;
 
     private List<TokenDto> remainingTokenList;
