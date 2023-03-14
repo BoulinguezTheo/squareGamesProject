@@ -8,8 +8,6 @@ import fr.le_campus_numerique.square_games.engine.Token;
 import java.util.*;
 
 public class GameDto {
-    private String gameName;
-    private int boardSize;
 
     private int gameId;
     private GameStatus gameStatus;

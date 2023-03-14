@@ -1,7 +1,5 @@
 package com.example.squaregamesspring.model;
 
-import fr.le_campus_numerique.square_games.engine.Game;
-
 import java.util.HashMap;
 import java.util.Map;
 

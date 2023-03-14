@@ -15,10 +15,8 @@ public class TicTacToePlugin implements GamePlugin{
     private String boardSize;
     @Value("${tictactoe.default-name}")
     private String name;
-    private MessageSource message;
 
-    public TicTacToePlugin(){
-    }
+
     @Override
     public Game createGame() {
         GameFactory gameFactory = new TicTacToeGameFactory();

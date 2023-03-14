@@ -1,8 +1,5 @@
 package com.example.squaregamesspring.dto;
 
-import com.example.squaregamesspring.model.GameInProgress;
-import com.example.squaregamesspring.service.CreateGameService;
-import fr.le_campus_numerique.square_games.engine.Game;
 
 public class CreateGameDto {
     private String gameName;

@@ -18,7 +18,7 @@ public class CreateGamesImpl implements CreateGameService {
     private List<GamePlugin> listGames;
 
     @Override
-    public GameInProgress createGame(CreateGameDto pParams) {
+    public synchronized GameInProgress createGame(CreateGameDto pParams) {
         Game game = listGames.stream()
                 .filter(g -> g.getName().equals(pParams.getGameName()))
                 .findFirst()

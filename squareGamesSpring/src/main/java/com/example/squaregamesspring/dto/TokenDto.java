@@ -2,8 +2,6 @@ package com.example.squaregamesspring.dto;
 
 import com.example.squaregamesspring.controller.CellPosition;
 
-import java.util.UUID;
-
 public class TokenDto {
     private String ownerId;
     private String name;
