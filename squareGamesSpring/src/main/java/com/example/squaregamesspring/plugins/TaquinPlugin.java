@@ -14,7 +14,6 @@ public class TaquinPlugin implements GamePlugin{
     private String boardSize;
     @Value("${taquin.default-name}")
     private String name;
-
     @Override
     public Game createGame() {
         GameFactory gameFactory = new TaquinGameFactory();

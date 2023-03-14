@@ -1,7 +1,6 @@
 package com.example.squaregamesspring.dto;
 
 public class MoveTokenDto {
-
     private Integer oldX = null;
     private Integer oldY= null;
     private int newX;

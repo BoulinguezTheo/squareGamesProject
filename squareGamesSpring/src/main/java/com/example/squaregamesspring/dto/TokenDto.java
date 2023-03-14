@@ -7,14 +7,14 @@ public class TokenDto {
     private String name;
     private CellPosition position;
 
-    public TokenDto() {
-    }
+    public TokenDto() {}
 
     public TokenDto(String pOwnerId, String pName, CellPosition pPosition){
         this.ownerId = pOwnerId;
         this.name = pName;
         this.position = pPosition;
     }
+
     public TokenDto(String pOwnerId, String pName){
         this.ownerId = pOwnerId;
         this.name = pName;
@@ -23,6 +23,7 @@ public class TokenDto {
     public String getOwnerId() {
         return ownerId;
     }
+
     public void setOwnerId(String pOwnerID){
         this.ownerId = pOwnerID;
     }
