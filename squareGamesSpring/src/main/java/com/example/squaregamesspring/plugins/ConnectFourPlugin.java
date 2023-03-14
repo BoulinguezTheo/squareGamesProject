@@ -15,8 +15,6 @@ public class ConnectFourPlugin implements GamePlugin{
     @Value("${connectfour.default-name}")
     private String name;
 
-    public ConnectFourPlugin() {
-    }
     @Override
     public Game createGame() {
         GameFactory gameFactory = new ConnectFourGameFactory();
