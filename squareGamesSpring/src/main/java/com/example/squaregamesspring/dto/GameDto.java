@@ -9,7 +9,7 @@ import java.util.*;
 
 public class GameDto {
 
-    private int gameId;
+    public int gameId;
     private GameStatus gameStatus;
 
     private List<TokenDto> remainingTokenList;

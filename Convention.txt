@@ -1,0 +1,102 @@
+Organisation d'un fichier:
+Chaque fichier présente la même structure:
+    - Commentaire du début
+    - Imports
+    - Déclaration de classe ou Interface
+    - Attributs
+    - Constructeur
+    - Getter et Setter
+    - Méthodes
+
+
+Commentaires du début:
+Les commentaires du début doivent suivre l'exemple suivant:
+/*
+ * Nom de la classe
+ *
+ * Version
+ *
+ * Date
+ *
+ * Indication
+ */
+
+
+Imports et Packages:
+Les packages doivent précéder les imports et contenir un import ou package par ligne comme dans l'exemple suivant:
+package java.awt
+import com.example.squaregamesspring.dto.*;
+import com.example.squaregamesspring.model.GameInProgress;
+import com.example.squaregamesspring.model.GamesInProgressStorage;
+
+
+Indentation:
+L'indentation est de 4 espaces ou une tabulation. Le choix est laissé libre.
+
+
+Longueur des lignes:
+Eviter les lignes de plus de 80 caractères.
+
+Lignes brisées:
+Lorsqu'une ligne ne peut tenir sur une seule ligne, il faut la briser selon les principes suivants:
+    - couper après une virgule
+    - couper avant un opérateur
+    - aligner la nouvelle ligne avec le début de l'expression au même nivreau de la ligne précédente
+
+Voici quelques exemples dans des appels de méthdes:
+uneMéthode(expressionLongue1, expressionLongue1, expressionLongue3,
+        expressionLongue4, expressionLongue5);
+
+var = uneMethode2(expressionLongue1,
+                uneMethode3(expressionLongue2, expressionLongue3));
+
+nomLong1 = nomLong2 * (nomLong3 + nomLong4 - nomLong5)
++ 4 * nomLong6
+
+Voici à présent deux exemples de d éeclarations de m éthodes. Le premier est le cas courant.
+Le second mettrait les deuxièmes et troisièmes lignes à l’extrême droite avec une indentation
+conventionnelle, et utilise plutôt une indentation de huit (8) espaces.
+
+// INDENTATION CONVENTIONNELLE
+uneMethode(int unArgument, Object unAutreArgument,
+            String encoreUnAutreArgument, Object etEncoreUn) {
+...
+}
+// INDENTER DE 8 ESPACES POUR EVITER DES INDENTATIONS TROP LONGUES
+private static synchronized tresLongNomDeMethode(int unArgument,
+    Object unAutreArgument, String encoreUnAutreArgument,
+    Object etEncoreUn) {
+...
+}
+
+Voici quelques exemples dans des IF, ELSE IF, ELSE:
+if ((condition1 && condition2)
+        || (condition3 && condition4)
+        ||!(condition5 && condition6)) {
+    faitQuelqueChose();
+}
+
+Commentaires:
+Les commentaires devront utiliser le format suivant:
+    - /* Commentaire */
+
+Il est autorisé de faire des commentaires "insérés" comme suit:
+int number1 = 5; /* Exemple de commentaire inséré */
+
+Pour le commentaire en bbloc on utilisera le format suivant:
+/*
+ * Commentaire
+ * en
+ * bloc
+ */
+
+Pour les commentaire en une ligne on utilisera le format suivant:
+/* Commentaire one line */
+
+
+Convention de nommage:
+    - La langue utilisé sera l'Anglais
+    - Les packages seront nommés au pluriel tout en minuscule
+    - Les classes seront nommés au singulier avec la première lettre en majuscule
+    - Pour les méthodes et attributs nous utiliserons la convention camel case
+    -

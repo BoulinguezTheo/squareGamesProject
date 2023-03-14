@@ -10,13 +10,13 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class GameServiceImpl implements GameService {
-    GamesInProgressStorage.GamesStorage storage;
     @Override
     public void moveToken(MoveTokenDto pParams, int gameId) throws InvalidPositionException {
-        Game game = storage.getGameById(gameId).getGame();
+        Game game = GamesInProgressStorage.GamesStorage.getGameById(gameId).getGame();
         Token token;
         if (pParams.getOldX() == null && pParams.getOldY() == null){
-            token = game.getRemainingTokens().stream()
+            token = game.getRemainingTokens()
+                    .stream()
                     .findFirst()
                     .orElse(null);
         }else{
