@@ -4,12 +4,8 @@ import com.example.squaregamesspring.dto.*;
 import com.example.squaregamesspring.model.GameInProgress;
 import com.example.squaregamesspring.model.GamesInProgressStorage;
 import com.example.squaregamesspring.service.GameService;
-import com.example.squaregamesspring.service.CreateGamesImpl;
 import com.example.squaregamesspring.service.CreateGameService;
-import com.example.squaregamesspring.service.GameServiceImpl;
-import fr.le_campus_numerique.square_games.engine.GameStatus;
 import fr.le_campus_numerique.square_games.engine.InvalidPositionException;
-import jakarta.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -23,18 +19,16 @@ public class GameController {
     GameService board;
     GameInProgress gameInProgress;
     GamesInProgressStorage.GamesStorage storage;
-    public GameController(){
-//        this.createGame = new CreateGamesImpl();
-//        this.board = new GameServiceImpl();
-    }
+
+    public GameController(){}
+
     @PostMapping("")
     public GameDto createGame(@RequestBody CreateGameDto pParams){
         gameInProgress = createGame.createGame(pParams);
-        GameDto gameDto = new GameDto(gameInProgress);
-        return gameDto;
+        return new GameDto(gameInProgress);
     }
 
-    @PutMapping ("/{gameId}/movetoken")
+    @PutMapping ("/{gameId}/move-token")
     public boolean getTokensBoard(@RequestBody MoveTokenDto pParams, @PathVariable("gameId") int gameId) {
         try{
             board.moveToken(pParams, gameId);
@@ -46,34 +40,36 @@ public class GameController {
 
     @GetMapping("/{gameId}")
     public GameDto getGame(@PathVariable("gameId") int gameId){
-        return new GameDto(storage.getGameById(gameId));
+        return new GameDto(GamesInProgressStorage.GamesStorage.getGameById(gameId));
     }
 
-    @GetMapping("/{gameId}/remainingtokens")
+    @GetMapping("/{gameId}/remaining-tokens")
     public List<TokenDto> getRemainingTokens(@PathVariable("gameId") int gameId){
-        return new GameDto(storage.getGameById(gameId)).getRemainingTokenList();
+        return new GameDto(GamesInProgressStorage.GamesStorage.getGameById(gameId)).getRemainingTokenList();
     }
 
-    @GetMapping("/{gameId}/removedtokens")
+    @GetMapping("/{gameId}/removed tokens")
     public List<TokenDto> getTokensRemoved(@PathVariable("gameId") int gameId){
-        return new GameDto(storage.getGameById(gameId)).getRemovedTokenList();
+        return new GameDto(GamesInProgressStorage.GamesStorage.getGameById(gameId)).getRemovedTokenList();
     }
 
-    @GetMapping("/{gameId}/boardtokens")
+    @GetMapping("/{gameId}/board-tokens")
     public List<TokenDto> getTokensBoard(@PathVariable("gameId") int gameId){
-        return new GameDto(storage.getGameById(gameId)).getBoardTokenList();
+        return new GameDto(GamesInProgressStorage.GamesStorage.getGameById(gameId)).getBoardTokenList();
     }
 
     @GetMapping("/{gameId}/status")
     public GameStatusDto getStatus(@PathVariable("gameId") int gameId){
-        return new GameStatusDto(storage.getGameById(gameId).getGame().getStatus(), storage.getGameById(gameId).getGame().getCurrentPlayerId());
+        return new GameStatusDto(GamesInProgressStorage.GamesStorage.getGameById(gameId).getGame().getStatus(),
+                storage.getGameById(gameId).getGame().getCurrentPlayerId());
     }
 
-    @GetMapping("/{gameId}/playersids")
+    @GetMapping("/{gameId}/players")
     public List<PlayerDto> getPlayerIds(@PathVariable("gameId") int gameId){
         return new GameDto(storage.getGameById(gameId)).getPlayerIdsList();
     }
-    @GetMapping("/{gameId}/currentplayerid")
+
+    @GetMapping("/{gameId}/current-player-id")
     public PlayerDto getCurrentPlayerId(@PathVariable("gameId") int gameId){
         PlayerDto currentPlayer = new PlayerDto();
         currentPlayer.setPlayerId(storage.getGameById(gameId).getGame().getCurrentPlayerId());

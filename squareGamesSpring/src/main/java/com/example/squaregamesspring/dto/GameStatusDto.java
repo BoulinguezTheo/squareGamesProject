@@ -7,9 +7,9 @@ import java.util.UUID;
 public class GameStatusDto {
     private GameStatus gameStatus;
     UUID playerId;
-    public GameStatusDto(){
 
-    }
+    public GameStatusDto(){}
+
     public GameStatusDto(GameStatus pStatus, UUID pPlayerId) {
         this.gameStatus = pStatus;
         this.playerId = pPlayerId;
@@ -17,9 +17,11 @@ public class GameStatusDto {
     public GameStatus getGameStatus() {
         return gameStatus;
     }
+
     public void setGameStatus(GameStatus gameStatus) {
         this.gameStatus = gameStatus;
     }
+
     public UUID getPlayerId() {
         return playerId;
     }

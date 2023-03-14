@@ -17,7 +17,8 @@ public class TicTacToePlugin implements GamePlugin{
     private String name;
     private MessageSource message;
 
-    public TicTacToePlugin(){
+    public TicTacToePlugin(MessageSource message){
+        this.message = message;
     }
     @Override
     public Game createGame() {

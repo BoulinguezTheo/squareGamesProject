@@ -17,8 +17,7 @@ public class TaquinPlugin implements GamePlugin{
     @Value("${taquin.default-name}")
     private String name;
 
-    public TaquinPlugin() {
-    }
+    public TaquinPlugin() {}
 
     @Override
     public Game createGame() {
