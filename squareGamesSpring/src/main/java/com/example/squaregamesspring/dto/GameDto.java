@@ -11,6 +11,8 @@ public class GameDto {
 
     private int gameId;
     private GameStatus gameStatus;
+    private String gameName;
+    private int boardSize;
 
     private List<TokenDto> remainingTokenList;
     private List<TokenDto> removedTokenList;
